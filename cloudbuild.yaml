@@ -1,0 +1,5 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/scientific-air-405902/my-flask-app', '.']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['compute', 'instances', 'update-container', 'my-instance', '--container-image', 'gcr.io/scientific-air-405902/my-flask-app']
