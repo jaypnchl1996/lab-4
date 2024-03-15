@@ -1,5 +1,12 @@
 steps:
+  # Step 1: Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/scientific-air-405902/my-flask-app', '.']
+
+  # Step 2: Push Docker image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/scientific-air-405902/my-flask-app']
+
+  # Step 3: Update Compute Engine instance with new container image
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['compute', 'instances', 'update-container', 'my-instance', '--container-image', 'gcr.io/scientific-air-405902/my-flask-app']
